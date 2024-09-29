@@ -15,7 +15,7 @@ VOICE6 = "en-GB-RyanNeural"
 VOICE7 = "en-CA-LiamNeural"
 
 
-OUTPUT_FOLDER = "Lib\\audtemp"  # Specify the folder here
+OUTPUT_FOLDER = "audtemp"  # Specify the folder here
     
 # Turn this into a class
 class Talk:
