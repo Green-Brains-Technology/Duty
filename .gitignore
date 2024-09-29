@@ -130,6 +130,10 @@ ENV/
 env.bak/
 venv.bak/
 GreenBrains/
+Include/
+Scripts/
+Lib/
+pyvenv.cfg
 
 # Spyder project settings
 .spyderproject
