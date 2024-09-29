@@ -12,9 +12,9 @@ reach_llm = ReachLLM(api_key="YOUR_API_KEY")
 listen = Listen()
 
 # Main loop starting here
-print("Initializing Knight ...")
+print("Initializing Duty ...")
 
-asyncio.run(talk.speak_text("Knight has initiated. Hello Fredrick. I will be on standby for your command."))
+asyncio.run(talk.speak_text("Duty has initiated. Hello Boss. I will be on standby for your command."))
 while True:
     prompt = listen.record_text()
     # check if prompt begins with the word "midnight"

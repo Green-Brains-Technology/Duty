@@ -21,7 +21,7 @@ class Midknight:
         output, error = self.run_code(formatted_code)
         
         if error:
-            asyncio.run(self.talk.speak_text("Ermmmmmm frederick, there seem to be an error with code execution. I will need your attention."))
+            asyncio.run(self.talk.speak_text("Ermmmmmm duty, there seem to be an error with code execution. I will need your attention."))
         else:
             asyncio.run(self.talk.speak_text("Finished successfully!"))
         
@@ -73,5 +73,3 @@ class Midknight:
 # print(f"The sum of {{x}} and {{y}} is {{x + y}}")
 # """
     
-
-
