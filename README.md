@@ -1,3 +1,3 @@
 # Duty
 
-We are creatin an AI assistant for alerting and task management.
+We are creating an AI assistant for alerting and task management.
