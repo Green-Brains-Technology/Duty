@@ -21,7 +21,11 @@ OUTPUT_FOLDER = "audtemp"  # Specify the folder here
 class Talk:
     def __init__(self):
         self.voice = VOICE2
-        self.output_file = os.path.join(OUTPUT_FOLDER, "audio.wav")
+        self.output_folder = OUTPUT_FOLDER
+        
+        if not os.path.exists(self.output_folder):
+            os.makedirs(self.output_folder)
+        self.output_file = os.path.join(self.output_folder, "audio.wav")
         
     async def speak_text(self, text):
         """Convert text to speech and play it."""
