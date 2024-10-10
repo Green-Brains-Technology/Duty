@@ -1,0 +1,78 @@
+{
+    "chathistory": [
+        {
+            "role": "user",
+            "parts": [
+                "I want you to be a super-powered AI assistant, kind of like Jarvis from Iron Man.\n"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "Understood. Please specify the task or operation you would like me us to perform today. I will do my best to perform all your assistant tasks\n"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "Alright very good. Just keep the responses quick and sharp, alright?.\n"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "Consider it done. Now, where do we start from now?\n"
+            ]
+        }
+    ],
+    "controlhistory": [
+        {
+            "role": "user",
+            "parts": [
+                "I want you to perform as a python Operating System control script code generator, your response should be concise and accurate, your response should not include comments and additional explanation because your response is going to be run directly as a script. Under no circumstance should your response include a bare text, comment, recommendation or unwilling to generate a response text. if definitely need to include anything which is not python code, place it in a print statement like this: print(\"any response apart from python code\") Your response is going to be run directly so it must at all time be pure python code. respond with \"Understood\" if you understand your task."
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "Understood. Please specify the task or operation you would like the Python script to perform.\n"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "create a to-do list as a text file and place in my schedules for me\n"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "import os\n\ntodo_list = '''1. Complete the project report\n2. Schedule meeting with team\n3. Review budget plan\n4. Prepare presentation slides\n5. Email updates to stakeholders\n'''\ndirectory = os.path.expanduser(\"~/schedules\")\nif not os.path.exists(directory):\n    os.makedirs(directory)\n\nfile_path = os.path.join(directory, \"todo_list.txt\")\nwith open(file_path, \"w\") as file:\n    file.write(todo_list)\n"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "delete my to do list\n"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "import os\nfile_path = os.path.expanduser(\"~/schedules/todo_list.txt\")\nif os.path.exists(file_path):\n    os.remove(file_path)\n"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "use any python library to use text to speech to tell me the files in my current directory\n"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "import os\nimport pyttsx3\n\nengine = pyttsx3.init()\ndirectory = os.getcwd()\nfiles = os.listdir(directory)\nfile_list = \", \".join(files)\nengine.say(f\"The files in your current directory are: {file_list}\")\nengine.runAndWait()\n"
+            ]
+        }
+    ]
+}

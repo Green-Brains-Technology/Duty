@@ -6,7 +6,7 @@ from reachllm import ReachLLM
 from talk import Talk
 from listen import Listen
 from midnight import Midknight
-from controller import load_data, save_data
+from controller import load_data, save_user
 
 talk = Talk()
 reach_llm = ReachLLM(api_key="YOUR_API_KEY")
@@ -43,10 +43,10 @@ async def main():
     if data:
         user_name = data['user_name']
         ai_name = data['ai_name']
-        await talk.speak_text(f"Welcome back, {user_name}! {ai_name} at your service.")
+        await talk.speak_text(f"Welcome back, {user_name}! starting all services now .")
     else:
         user_name, ai_name = await assistant_set_up(talk, listen)
-        save_data(user_name, ai_name)
+        save_user(user_name, ai_name)
     
     reach_llm = ReachLLM(api_key="YOUR_API_KEY")
     reach_llm.user_name = user_name
