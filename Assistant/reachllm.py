@@ -2,12 +2,9 @@ import speech_recognition as sr
 import os
 import google.generativeai as genai
 import google.generativeai as genai
-from histories import chathistory, controlhistory
 import json
-from controller import update_history
-import sys
-from talk import Talk
-import asyncio
+from helpers import load_data
+
 
 
 class ReachLLM:
@@ -51,36 +48,28 @@ class ReachLLM:
     def input_output(self, text):
 
         file_path = "histories.json"
+
         with open(file_path, "r") as file:
             data = json.load(file)
         
-        talk = Talk()
+        appdata = load_data()
         
-        if text.startswith("midnight"):
+        if text.startswith(appdata["ai_name"]):
             # remove midnight from beggining of the text
-            text = text[8:]
-            update_history(type = "control", role = "user", text = text)
+            text = text[len(appdata['ai_name']):]
             chat_session = self.model.start_chat(
                 history=data["controlhistory"],
             )
             values = chat_session.send_message(text)
             response = values.text
-            update_history(type = "control", role = "model", text = values.text)
             return response
-        elif text == "java shutdown" or text == "shutdown" or text == "shutdown java":
-            #await talk.speak_text(f"Shutting Down")
-            print("Shutting Down...")
-            sys.exit()
         else:
-            update_history(type = "chat", role = "user", text = text)
-            
             chat_session = self.model.start_chat(
                 history=data["chathistory"],
             )
             values = chat_session.send_message(text)
             # remove all * from response
             response = values.text
-            update_history(type = "chat", role = "model", text = values.text)
             return response.replace("*", "")
 
 

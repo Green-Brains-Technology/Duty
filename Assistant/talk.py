@@ -25,21 +25,24 @@ class Talk:
         
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
-        self.output_file = os.path.join(self.output_folder, "audio.wav")
         
-    async def speak_text(self, text):
+        
+    async def speak_text(self, text, audioname):
+        
+        output_file = os.path.join(self.output_folder, f"{audioname}.wav")
+        
         """Convert text to speech and play it."""
         communicate = edge_tts.Communicate(text, self.voice)
-        await communicate.save(self.output_file)
+        await communicate.save(output_file)
 
         # Read the audio file
-        audio_data, sample_rate = sf.read(self.output_file, dtype='float32')
+        audio_data, sample_rate = sf.read(output_file, dtype='float32')
 
         # Play the audio
         sd.play(audio_data, sample_rate)
         sd.wait()
 
-        os.remove(self.output_file)
+        os.remove(output_file)
 
 # Implementation
 # talk = Talk()

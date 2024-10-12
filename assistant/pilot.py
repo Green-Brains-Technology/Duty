@@ -4,29 +4,32 @@ import tempfile
 import asyncio
 from reachllm import ReachLLM
 from talk import Talk
-from listen import Listen
 import black
 from black import format_str
+from helpers import load_data
 
-class Midknight:
-    def __init__(self, prompt):
-        self.prompt = prompt
-        self.talk = Talk()
-        self.reach_llm = ReachLLM(api_key="YOUR_API_KEY")
-        self.coderaw = self.reach_llm.input_output(prompt)
+class Pilot:
+    def __init__(self):
+        self.talking = Talk()
+        self.reach_llm = ReachLLM(api_key="YOUR_API_KEY") 
+        self.user_data = load_data()
+
+    async def execute(self, prompt):
+        print("hrllo")
+        self.coderaw = self.reach_llm.input_output(f"generate the python code to {prompt} on windows, do not add any comment, just return code syntax. adding any comment will crush the app")
         clean_code = self.coderaw.replace("```python", "").replace("```", "")
+        print("Code:", clean_code)
         mode = black.FileMode(target_versions={black.TargetVersion.PY36})
         formatted_code = format_str(clean_code , mode=mode)  # Adjust mode as needed
         #print("Code:", formatted_code)
         output, error = self.run_code(formatted_code)
-        
+
         if error:
-            asyncio.run(self.talk.speak_text("Ermmmmmm duty, there seem to be an error with code execution. I will need your attention."))
+            await self.talking.speak_text(audioname="aud012", text=f"{self.user_data["user_name"]}, there seem to be an error with code execution. I will need your attention.")
         else:
-            asyncio.run(self.talk.speak_text("Finished successfully!"))
-        
-        print("Output:", output)
-        print("Error:", error)
+            await self.talking.speak_text(audioname="aud013", text="Finished successfully!")
+            print("Output:", output)
+            print("Error:", error)
         
     def run_code(self, code):
         """

@@ -22,26 +22,26 @@
             "role": "model",
             "parts": [
                 "Consider it done. Now, where do we start from now?\n"
-            ]
+            ] 
         }
     ],
     "controlhistory": [
         {
             "role": "user",
             "parts": [
-                "I want you to perform as a python Operating System control script code generator, your response should be concise and accurate, your response should not include comments and additional explanation because your response is going to be run directly as a script. Under no circumstance should your response include a bare text, comment, recommendation or unwilling to generate a response text. if definitely need to include anything which is not python code, place it in a print statement like this: print(\"any response apart from python code\") Your response is going to be run directly so it must at all time be pure python code. respond with \"Understood\" if you understand your task."
+                "Generate me python code that performs the following actions on windows when executed, do not include any comments or information to the code because your response is going to be run directly as a script. All node code text should striclty be placed in a python print statement, place it in a print statement like this: print(\"any response apart from python code\") respond with \"print(\"Understoo\")\" if you understand your task."
             ]
         },
         {
             "role": "model",
             "parts": [
-                "Understood. Please specify the task or operation you would like the Python script to perform.\n"
+                "print(\"Understood\")"
             ]
         },
         {
             "role": "user",
             "parts": [
-                "create a to-do list as a text file and place in my schedules for me\n"
+                "generate the python code to create a to-do list as a text file and place in my schedules for me\n"
             ]
         },
         {
@@ -53,7 +53,7 @@
         {
             "role": "user",
             "parts": [
-                "delete my to do list\n"
+                "generate the python code to deleted the recectly created to do list\n"
             ]
         },
         {
@@ -65,7 +65,7 @@
         {
             "role": "user",
             "parts": [
-                "use any python library to use text to speech to tell me the files in my current directory\n"
+                "genereate the python code to use any python library to use text to speech to tell me the files in my current directory\n"
             ]
         },
         {
