@@ -11,23 +11,27 @@ from helpers import load_data
 class Pilot:
     def __init__(self):
         self.talking = Talk()
-        self.reach_llm = ReachLLM(api_key="YOUR_API_KEY") 
         self.user_data = load_data()
 
-    async def execute(self, prompt):
+    async def execute(self, code):
         print("hrllo")
-        self.coderaw = self.reach_llm.input_output(f"generate the python code to {prompt} on windows, do not add any comment, just return code syntax. adding any comment will crush the app")
-        clean_code = self.coderaw.replace("```python", "").replace("```", "")
+        clean_code = code.replace("```python", "").replace("```", "")
         print("Code:", clean_code)
-        mode = black.FileMode(target_versions={black.TargetVersion.PY36})
-        formatted_code = format_str(clean_code , mode=mode)  # Adjust mode as needed
-        #print("Code:", formatted_code)
+
+        try:
+            mode = black.FileMode(target_versions={black.TargetVersion.PY36})
+            formatted_code = format_str(clean_code , mode=mode)
+        except Exception as e:
+            #print(f"Error: {e}")
+            await self.talking.speak_text(audioname="aud018", text=f"The transformer failed to format the code, I am printing the code in the terminal")
+            print("Code:", formatted_code)
+            
         output, error = self.run_code(formatted_code)
 
         if error:
-            await self.talking.speak_text(audioname="aud012", text=f"{self.user_data["user_name"]}, there seem to be an error with code execution. I will need your attention.")
+            await self.talking.speak_text(audioname="aud019", text=f"{self.user_data["user_name"]}, there seem to be an error with code execution.")
         else:
-            await self.talking.speak_text(audioname="aud013", text="Finished successfully!")
+            await self.talking.speak_text(audioname="aud020", text="Finished successfully!")
             print("Output:", output)
             print("Error:", error)
         

@@ -2,6 +2,7 @@ import os
 import edge_tts
 import sounddevice as sd
 import soundfile as sf
+import asyncio
 
 # Female Voices
 VOICE1 = "en-US-AvaNeural"
@@ -26,24 +27,27 @@ class Talk:
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
         
+    
+    async def play_audio(self, output_file):
+        # Read the audio file
+        audio_data, sample_rate = sf.read(output_file, dtype='float32')
+        # Play the audio
+        sd.play(audio_data, sample_rate)
+        sd.wait()
         
     async def speak_text(self, text, audioname):
         
         output_file = os.path.join(self.output_folder, f"{audioname}.wav")
-        
         """Convert text to speech and play it."""
         communicate = edge_tts.Communicate(text, self.voice)
+
         await communicate.save(output_file)
 
         # Read the audio file
         audio_data, sample_rate = sf.read(output_file, dtype='float32')
-
         # Play the audio
         sd.play(audio_data, sample_rate)
         sd.wait()
 
-        os.remove(output_file)
 
-# Implementation
-# talk = Talk()
-# asyncio.run(talk.speak_text("Hello, World!"))
+        os.remove(output_file)

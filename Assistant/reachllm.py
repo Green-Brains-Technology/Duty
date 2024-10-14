@@ -1,5 +1,3 @@
-import speech_recognition as sr
-import os
 import google.generativeai as genai
 import google.generativeai as genai
 import json
@@ -9,7 +7,7 @@ from helpers import load_data
 
 class ReachLLM:
     def __init__(self, api_key):
-        self.api_key = "AIzaSyAQa03CGYA9B_ZdE78qz1oPrOO97iqU_F8"
+        self.api_key = "AIzaSyBHSfYFa_MqLGDb2GLC0YxGKHxSJfelBFQ"
 
         # Create the Generative Model with specific configurations
         self.generation_config = {
@@ -57,17 +55,20 @@ class ReachLLM:
         if text.startswith(appdata["ai_name"]):
             # remove midnight from beggining of the text
             text = text[len(appdata['ai_name']):]
+            finalcontrolprompt = (f"generate the python code to {text} on windows, do not add any comment, just return code syntax. adding any comment will crush the app")
+            
             chat_session = self.model.start_chat(
                 history=data["controlhistory"],
             )
-            values = chat_session.send_message(text)
+            values = chat_session.send_message(finalcontrolprompt)
             response = values.text
             return response
         else:
+            finalchatprompt = text
             chat_session = self.model.start_chat(
                 history=data["chathistory"],
             )
-            values = chat_session.send_message(text)
+            values = chat_session.send_message(finalchatprompt)
             # remove all * from response
             response = values.text
             return response.replace("*", "")

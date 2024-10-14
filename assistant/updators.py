@@ -46,9 +46,15 @@ class Updators:
         # Update the control history for the model
         self._update_history("controlhistory", "model", text)
 
-# Usage example:
-# manager = ChatHistoryManager("histories.json")
-# manager.update_chat_user("Hello, how are you?")
-# manager.update_chat_model("I'm doing well, thank you!")
-# manager.update_control_user("Control message from user")
-# manager.update_control_model("Control message from model")
+    def clear_chat_history(self):
+        # Load the data, clear the chat history, and write it back
+        data = self._load_data()
+        data["chathistory"] = data["chathistory"][:4]
+        self._write_data(data)
+    
+    def clear_control_history(self):
+        # Load the data, clear the control history, and write it back
+        data = self._load_data()
+        data["controlhistory"] = data["controlhistory"][:8]
+        self._write_data(data)
+
