@@ -29,6 +29,36 @@
             "parts": [
                 "shut down"
             ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "i can change the i can alter the data in the json phone"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "so i was saying it should i was asking you a question is so i can change the names here i can alter the data here and it will recognise it"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "okay so help me with this how are you made me a step-by-step process in making a clone of you"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "before he does that"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "open postman"
+            ]
         }
     ],
     "controlhistory": [
@@ -90,6 +120,18 @@
             "role": "model",
             "parts": [
                 "import os\nfile_path = os.path.join(os.getcwd(), \"male or text.txt\")\nwith open(file_path, \"w\") as file:\n    file.write(\"\")\n\n"
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                "jarvis open postman"
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                "import os\nos.startfile(\"postman://\")\n"
             ]
         }
     ]

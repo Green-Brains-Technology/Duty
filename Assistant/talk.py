@@ -21,7 +21,7 @@ OUTPUT_FOLDER = "audtemp"  # Specify the folder here
 # Turn this into a class
 class Talk:
     def __init__(self):
-        self.voice = VOICE6
+        self.voice = VOICE2
         self.output_folder = OUTPUT_FOLDER
         
         if not os.path.exists(self.output_folder):
