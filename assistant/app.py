@@ -109,10 +109,10 @@ class AssistCore:
                     return  # Exit the function after maximum retries
 
         # If the response was successful, continue with the usual workflow
-        speak_task = asyncio.create_task(self.talk.speak_text(audioname="aud015", text=response))
+        await self.talk.speak_text(audioname="aud015", text=response)
         
         # Start listening while the speak task runs
-        listener_task = asyncio.create_task(self.listener())
+        await self.listener()
 
         self.updatorrs.update_chat_model(response)
 
